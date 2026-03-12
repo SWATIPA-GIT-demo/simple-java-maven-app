@@ -20,19 +20,6 @@ pipeline {
             steps {
                 echo 'I am Test True bool'
             }
-            steps {
-                echo 'I am Test False bool'
-            }
-            when{
-                expression{
-                    VersionNumber == '1.0'
-                }
-            }
-            steps {
-                echo 'I am Test 1.0'
-            }
-            steps {
-                echo 'I am Test 1.0.0'
             }
             post {
                 always {
