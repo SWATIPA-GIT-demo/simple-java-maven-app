@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'I am Test True bool'
             }
-            }
+            
             post {
                 always {
                     echo 'I am AlwaYSblock'
