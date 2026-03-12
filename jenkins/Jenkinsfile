@@ -14,7 +14,12 @@ pipeline {
         stage('Test') {
             when{
                 expression{
-                    params.executeTests == true && params.VersionNumber == '1.0'
+                    allof{
+                       not{ params.executeTests == false }
+                        params.VersionNumber == '1.0'
+                        params.VersionName == 'test'
+                    }
+                    
                     
                 }
             }
