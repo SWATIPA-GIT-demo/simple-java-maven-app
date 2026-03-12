@@ -24,7 +24,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'I am Test True bool'
+                echo "I am Test True bool version: ${params.VersionNumber}"
             }
             
             post {
