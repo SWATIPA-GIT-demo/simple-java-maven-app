@@ -1,24 +1,48 @@
 pipeline {
     agent any
+    parameters{
+        string(name: 'VersionName', defaultValue: 'test', description: '')
+        choice(name: 'VersionNumber', choices: ['1.0', '2.0', '3.0'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                echo 'I am Build stage'
             }
         }
         stage('Test') {
+            when{
+                expression{
+                    executeTests == 'true'
+                }
+            }
             steps {
-                sh 'mvn test'
+                echo 'I am Test True bool'
+            }
+            steps {
+                echo 'I am Test False bool'
+            }
+            when{
+                expression{
+                    VersionNumber == '1.0'
+                }
+            }
+            steps {
+                echo 'I am Test 1.0'
+            }
+            steps {
+                echo 'I am Test 1.0.0'
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    echo 'I am AlwaYSblock'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                echo 'I am Deliver block'
             }
         }
         stage('Complete') {
